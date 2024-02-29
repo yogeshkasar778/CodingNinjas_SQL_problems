@@ -1,4 +1,3 @@
-# CodingNinjas SQL  Intervie Problems
 
 # :computer: CodingNinjas SQL  Interview Problems and Solutions - 
 - [Easy](https://github.com/yogeshkasar778/CodingNinjas_SQL_problems/new/main?readme=1#dart-difficulty-level---easy)
