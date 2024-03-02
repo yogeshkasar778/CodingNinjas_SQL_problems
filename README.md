@@ -53,8 +53,9 @@
   The table company holds the company information. Every company has a com_id and a name.
   
   Table: Orders 
+  
   | order_id | order_date | com_id  | sales_id | amount |
-  |----------|------|--------|------|----------|--------|
+  |----------|------------|-------- |----------|--------|
   | 1        |   1/1/2014 |    3    |    4     | 100000 |
   | 2        |   2/1/2014 |    4    |    5     | 5000   |
   | 3        |   3/1/2014 |    1    |    1     | 50000  |
@@ -68,7 +69,48 @@
     where sales_id not in (select sales_id from  Orders as o 
                           join  Company as c on c.com_id  =o.com_id  
                           where c.name='RED' ); 
+ ### Q.4 Problem statement Print the genre and the maximum weighted rating among all the movies of that genre released in 2014 per genre. (Download the dataset from console)
+**Note:**
+1. Do not print any row where either genre or the weighted rating is empty/null.
+2.  weighted_rating = avgerge of (rating + metacritic/10.0)
+3. Keep the name of the columns as 'genre' and 'weighted_rating'
+4. The genres should be printed in alphabetical order.
+
+   **IMDb Max Weighted Rating**:
+   `Company - Thought Works`
+   
+ ###  Solution - 
     
+      select g.genre, max((i.rating+i.metacritic/10.0)/2.0)as weighted_rating 
+      from genre as g
+      join imdb as i on g.movie_id=i.movie_id
+      where g.genre is not null and  (i.rating is not null and i.metacritic is not null) 
+          and i.title like '%2014%'
+      group by g.genre
+      order by g.genre  asc;
+ ### Q.5 Problem statement: Swap Salary
+ 
+   **Swap Salary**:
+   `Company - Thought Works`
+
+   Table: Salary
+   
+   | Column Name | Type     |
+   |-------------|----------|
+   | id          | int      |
+   | name        | varchar  |
+   | sex         | ENUM     |
+   | salary      | int      |
+   
+ id is the primary key for this table.
+ The sex column is ENUM value of type ('m', 'f').
+ The table contains information about an employee.  
+ 
+ ###  Solution - 
+    
+      update salary
+      set sex=replace('fm',sex,'')
+      
 ##  :dart: `Difficulty Level - Moderate`
 
  ### Q.1 From the IMDb dataset, print the title and rating of those movies that have a genre starting from 'C' released in 2014 with a budget higher than 4 Crore.
