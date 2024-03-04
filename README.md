@@ -91,8 +91,8 @@
       
  ### Q.5 Problem statement: There is a table World
  
-   **Swap Salary**:
-   `Company - Thought Works`
+   **Big Countries**
+   `Company - IBM,Infosys`
    
    | name            | continent  | area       | population   | gdp       |
    |-----------------|------------|------------|--------------|-----------|
@@ -114,7 +114,7 @@
   ### Q.6 Problem statement: Swap Salary
  
    **Swap Salary**:
-   `Company - Thought Works`
+   `Company - Cognizant`
 
    Table: Salary
    
@@ -133,6 +133,37 @@
     
       update salary
       set sex=replace('fm',sex,'')  
+
+  ### Q.7 Problem statement: Write a SQL query for a report that provides the following information for each person in the Person table, regardless if there is an address for each of those people: FirstName, LastName, City, State
+ 
+   **Combine Two Tables**:
+   `Company - Tata Consultancy Services (TCS`
+
+   Table: Person
+   
+| Column Name | Type    |
+|-------------|---------|
+| PersonId    | int     |
+| FirstName   | varchar |
+| LastName    | varchar |
+
+PersonId is the primary key column for this table.
+
+Table: Address
+
+| Column Name | Type    |
+|-------------|---------|
+| AddressId   | int     |
+| PersonId    | int     |
+| City        | varchar |
+| State       | varchar |
+AddressId is the primary key column for this table.
+ 
+ ###  Solution - 
+    
+      select p.FirstName,p.LastName,a.City,a.State 
+      from Person as P
+      left join Address as a on p.PersonId=a.PersonId
       
 ##  :dart: `Difficulty Level - Moderate`
 
