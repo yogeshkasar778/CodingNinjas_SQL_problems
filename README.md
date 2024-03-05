@@ -164,6 +164,42 @@ AddressId is the primary key column for this table.
       select p.FirstName,p.LastName,a.City,a.State 
       from Person as P
       left join Address as a on p.PersonId=a.PersonId
+
+  ### Q.8 Write a SQL query for a report that provides the pairs (actor_id, director_id) where the actor have co-worked with the director at least 3 times.
+ 
+   **Director's Actor**:
+   `Company - Tata Consultancy Services (TCS`
+
+   Table: ActorDirector
+   
+| Column Name | Type    |
+|-------------|---------|
+| actor_id    | int     |
+| director_id | int     |
+| timestamp   | int     |
+
+Timestamp is the primary key column for this table.
+
+Example:
+
+ActorDirector table:
+
+| actor_id    | director_id | timestamp   |
+|-------------|-------------|-------------|
+| 1           | 1           | 0           |
+| 1           | 1           | 1           |
+| 1           | 1           | 2           |
+| 1           | 2           | 3           |
+| 1           | 2           | 4           |
+| 2           | 1           | 5           |
+| 2           | 1           | 6           |
+
+ ###  Solution - 
+    
+      select actor_id, director_id 
+      from ActorDirector 
+      group by actor_id, director_id
+      having count(timestamp)>=3 
       
 ##  :dart: `Difficulty Level - Moderate`
 
