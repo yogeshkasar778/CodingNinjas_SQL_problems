@@ -201,6 +201,29 @@ ActorDirector table:
       group by actor_id, director_id
       having count(timestamp)>=3 
       
+  ### Q.9 Write a SQL query to rank scores. If there is a tie between two scores, both should have the same ranking. Note that after a tie, the next ranking number should be the next consecutive integer value. In other words, there should be no "holes" between ranks.
+ 
+   **Rank Scores**:
+   `Company - Tata Consultancy Services (TCS`
+
+| Id | Score |
+|----|-------|
+| 1  | 3.50  |
+| 2  | 3.65  |
+| 3  | 4.00  |
+| 4  | 3.85  |
+| 5  | 4.00  |
+| 6  | 3.65  |
+
+For example, given the above Scores table, your query should generate the following report (order by highest score):
+
+ ###  Solution - 
+    
+      select 
+           Score, 
+            dense_rank() over (order by Score desc) as "Rank"
+      from Scores;      
+      
 ##  :dart: `Difficulty Level - Moderate`
 
  ### Q.1 From the IMDb dataset, print the title and rating of those movies that have a genre starting from 'C' released in 2014 with a budget higher than 4 Crore.
