@@ -223,7 +223,122 @@ For example, given the above Scores table, your query should generate the follow
            Score, 
             dense_rank() over (order by Score desc) as "Rank"
       from Scores;      
-      
+
+  ### Q.10 Write an SQL query to report all the sessions that did not get shown any ads. Return the result table in any order.
+ 
+   **Spotify Sessions**:
+   `Company - Tata Consultancy Services (TCS`
+
+Table: Playback
+
+| Column Name | Type |
+|-------------|------|
+| session_id  | int  |
+| customer_id | int  |
+| start_time  | int  |
+| end_time    | int  |
+
+session_id is the primary key for this table.
+customer_id is the ID of the customer watching this session.
+The session runs during the inclusive interval between start_time and end_time.
+It is guaranteed that start_time <= end_time and that two sessions for the same customer do not intersect.
+
+
+Table: Ads
+
+ | Column Name | Type |
+ |-------------|------|
+ | ad_id       | int  |
+ | customer_id | int  |
+ | timestamp   | int  |
+
+ad_id is the primary key for this table.
+Customer_id is the ID of the customer viewing this ad.
+Timestamp is the moment at which the ad was shown.
+
+Playback table:
+
+| session_id | customer_id | start_time | end_time |
+|------------|-------------|------------|----------|
+| 1          | 1           | 1          | 5        |
+| 2          | 1           | 15         | 23       |
+| 3          | 2           | 10         | 12       |
+| 4          | 2           | 17         | 28       |
+| 5          | 2           | 2          | 8        |
+
+Ads table:
+
+| ad_id | customer_id | timestamp |
+|-------|-------------|-----------|
+| 1     | 1           | 5         |
+| 2     | 2           | 17        |
+| 3     | 2           | 20        |
+
+ ###  Solution - 
+    
+      select session_id  from Playback as p 
+      left join Ads as a on p.customer_id =a.customer_id  and p.start_time<=a.timestamp
+      and p.end_time>=timestamp 
+      where a.ad_id is null    
+
+  ### Q.11 Write an SQL query to report, How much cubic feet of volume does the inventory occupy in each warehouse. warehouse_name volume Return the result table in any order.
+ 
+   **Warehouse Manager**:
+   `Company - Tata Consultancy Services (TCS`
+
+Table: Warehouse
+
+| Column Name  | Type    |
+|--------------|---------|
+| name         | varchar |
+| product_id   | int     |
+| units        | int     |
+
+(name, product_id) is the primary key for this table.
+Each row of this table contains the information of the products in each warehouse.
+
+Table: Products
+
+| Column Name   | Type    |
+|---------------|---------|
+| product_id    | int     |
+| product_name  | varchar |
+| Width         | int     |
+| Length        | int     |
+| Height        | int     |
+
+product_id is the primary key for this table.
+Each row of this table contains the information about the product dimensions (Width, Lenght and Height) in feets of each product.
+
+The query result format is in the following example.
+
+Warehouse table:
+
+| name       | product_id   | units       |
+|------------|--------------|-------------|
+| LCHouse1   | 1            | 1           |
+| LCHouse1   | 2            | 10          |
+| LCHouse1   | 3            | 5           |
+| LCHouse2   | 1            | 2           |
+| LCHouse2   | 2            | 2           |
+| LCHouse3   | 4            | 1           |
+
+Products table:
+
+| product_id | product_name | Width      | Length   | Height    |
+|------------|--------------|------------|----------|-----------|
+| 1          | LC-TV        | 5          | 50       | 40        |
+| 2          | LC-KeyChain  | 5          | 5        | 5         |
+| 3          | LC-Phone     | 2          | 10       | 10        |
+| 4          | LC-T-Shirt   | 4          | 10       | 20        |
+
+ ###  Solution - 
+    
+      select w.name as warehouse_name, SUM(p.Width * p.Length * p.Height * w.units) AS volume
+      from Warehouse w
+      join Products p on w.product_id = p.product_id
+      group by w.name; 
+            
 ##  :dart: `Difficulty Level - Moderate`
 
  ### Q.1 From the IMDb dataset, print the title and rating of those movies that have a genre starting from 'C' released in 2014 with a budget higher than 4 Crore.
