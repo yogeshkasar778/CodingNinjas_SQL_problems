@@ -339,6 +339,39 @@ Products table:
       join Products p on w.product_id = p.product_id
       group by w.name; 
 
+  ### Q.13 Write an SQL query to find the customer_number for the customer who has placed the largest number of orders. It is guaranteed that exactly one customer will have placed more orders than any other customer.
+  
+   **Customer Placing the Largest Number Orders**:
+   `Company - Tata Consultancy Services (TCS`
+
+able: Orders
+
+| Column Name     | Type     |
+|-----------------|----------|
+| order_number    | int      |
+| customer_number | int      |
+
+order_number is the primary key for this table.
+This table contains information about the order ID and the customer ID.
+
+The query result format is in the following example:
+
+Orders table:
+
+| order_number | customer_number |
+|--------------|-----------------|
+| 1            | 1               |
+| 2            | 2               |
+| 3            | 3               |
+| 4            | 3               |
+
+ ###  Solution - 
+    
+      select customer_number
+      from Orders
+      group by customer_number
+      having count(order_number)>1
+
   ### Q.12 Write an SQL query to find all the people who viewed more than one article on the same date, sorted in ascending order by their id.
   
    **Article**:
@@ -382,7 +415,7 @@ Views table:
                         group by viewer_id, view_date
                         having count(distinct article_id )>1)
       order by id asc;
-                        
+      
 ##  :dart: `Difficulty Level - Moderate`
 
  ### Q.1 From the IMDb dataset, print the title and rating of those movies that have a genre starting from 'C' released in 2014 with a budget higher than 4 Crore.
