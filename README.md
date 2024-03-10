@@ -339,7 +339,7 @@ Products table:
       join Products p on w.product_id = p.product_id
       group by w.name; 
 
-  ### Q.13 Write an SQL query to find the customer_number for the customer who has placed the largest number of orders. It is guaranteed that exactly one customer will have placed more orders than any other customer.
+  ### Q.12 Write an SQL query to find the customer_number for the customer who has placed the largest number of orders. It is guaranteed that exactly one customer will have placed more orders than any other customer.
   
    **Customer Placing the Largest Number Orders**:
    `Company - Tata Consultancy Services (TCS`
@@ -372,7 +372,7 @@ Orders table:
       group by customer_number
       having count(order_number)>1
 
-  ### Q.12 Write an SQL query to find all the people who viewed more than one article on the same date, sorted in ascending order by their id.
+  ### Q.13 Write an SQL query to find all the people who viewed more than one article on the same date, sorted in ascending order by their id.
   
    **Article**:
    `Company - Tata Consultancy Services (TCS`
@@ -415,7 +415,68 @@ Views table:
                         group by viewer_id, view_date
                         having count(distinct article_id )>1)
       order by id asc;
-      
+
+  ### Q.14 Write an SQL query to find the npv of all each query of queries table. Return the result table in any order.
+  
+   **NPV Queries**:
+   `Company - Tata Consultancy Services (TCS`
+
+Table: NPV
+
+| Column Name   | Type    |
+|---------------|---------|
+| id            | int     |
+| year          | int     |
+| npv           | int     |
+
+(id, year) is the primary key of this table.
+The table has information about the id and the year of each inventory and the corresponding net present value.
+
+
+Table: Queries
+
+| Column Name   | Type    |
+|---------------|---------|
+| id            | int     |
+| year          | int     |
+
+(id, year) is the primary key of this table.
+The table has information about the id and the year of each inventory query.
+
+The query result format is in the following example:
+
+VNPV table:
+
+| id   | year   | npv    |
+|------|--------|--------|
+| 1    | 2018   | 100    |
+| 7    | 2020   | 30     |
+| 13   | 2019   | 40     |
+| 1    | 2019   | 113    |
+| 2    | 2008   | 121    |
+| 3    | 2009   | 12     |
+| 11   | 2020   | 99     |
+| 7    | 2019   | 0      |
+
+Queries table:
+
+| id   | year   |
+|------|--------|
+| 1    | 2019   |
+| 2    | 2008   |
+| 3    | 2009   |
+| 7    | 2018   |
+| 7    | 2019   |
+| 7    | 2020   |
+| 13   | 2019   |
+
+ ###  Solution - 
+    
+      select q.id, q.year, COALESCE(n.npv, 0) as npv
+      from Queries q
+      left join NPV n on q.id = n.id and q.year = n.year;
+ 
+           
 ##  :dart: `Difficulty Level - Moderate`
 
  ### Q.1 From the IMDb dataset, print the title and rating of those movies that have a genre starting from 'C' released in 2014 with a budget higher than 4 Crore.
