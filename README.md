@@ -169,7 +169,7 @@ AddressId is the primary key column for this table.
   ### Q.8 Write a SQL query for a report that provides the pairs (actor_id, director_id) where the actor have co-worked with the director at least 3 times.
  
    **Director's Actor**:
-   `Company - Tata Consultancy Services (TCS`
+   `Company - Infosys`
 
    Table: ActorDirector
    
@@ -205,7 +205,7 @@ ActorDirector table:
   ### Q.9 Write a SQL query to rank scores. If there is a tie between two scores, both should have the same ranking. Note that after a tie, the next ranking number should be the next consecutive integer value. In other words, there should be no "holes" between ranks.
  
    **Rank Scores**:
-   `Company - Tata Consultancy Services (TCS`
+   `Company - VMware Inc`
 
 | Id | Score |
 |----|-------|
@@ -228,7 +228,7 @@ For example, given the above Scores table, your query should generate the follow
   ### Q.10 Write an SQL query to report all the sessions that did not get shown any ads. Return the result table in any order.
  
    **Spotify Sessions**:
-   `Company - Tata Consultancy Services (TCS`
+   `Company - LinkedIn, OYO`
 
 Table: Playback
 
@@ -285,7 +285,7 @@ Ads table:
   ### Q.11 Write an SQL query to report, How much cubic feet of volume does the inventory occupy in each warehouse. warehouse_name volume Return the result table in any order.
  
    **Warehouse Manager**:
-   `Company - Tata Consultancy Services (TCS`
+   `Company - JP Morgan,Morgan Stanley`
 
 Table: Warehouse
 
@@ -343,7 +343,7 @@ Products table:
   ### Q.12 Write an SQL query to find the customer_number for the customer who has placed the largest number of orders. It is guaranteed that exactly one customer will have placed more orders than any other customer.
   
    **Customer Placing the Largest Number Orders**:
-   `Company - Tata Consultancy Services (TCS`
+   `Company - Expedia Group`
 
 able: Orders
 
@@ -376,7 +376,7 @@ Orders table:
   ### Q.13 Write an SQL query to find all the people who viewed more than one article on the same date, sorted in ascending order by their id.
   
    **Article**:
-   `Company - Tata Consultancy Services (TCS`
+   `Company - Veritas Technologies LLC`
 
 Table: Views
 
@@ -420,7 +420,7 @@ Views table:
   ### Q.14 Write an SQL query to find the npv of all each query of queries table. Return the result table in any order.
   
    **NPV Queries**:
-   `Company - Tata Consultancy Services (TCS`
+   `Company - CoinDCX`
 
 Table: NPV
 
@@ -480,7 +480,7 @@ Queries table:
   ### Q.15 Write an SQL query to find the most frequently ordered product(s) for each customer. The result table should have the product_id and product_name for each customer_id who ordered at least one order. Return the result table in any order.
   
    **The Most Frequently Ordered Products for Each Customer**:
-   `Company - Tata Consultancy Services (TCS`
+   `Company - Amazon`
 
 Table: Customers
 
@@ -574,7 +574,7 @@ Products
   ### Q.16 You are running an ecommerce site that is looking for imbalanced orders. An imbalanced order is one whose maximum quantity is strictly greater than the average quantity of every order (including itself). The average quantity of an order is calculated as (total quantity of all products in the order) / (number of different products in the order). The maximum quantity of an order is the highest quantity of any single product in the order. Write an SQL query to find the order_id of all imbalanced orders. Return the result table in any order.
   
    **Orders With Maximum Quantity Above Average**:
-   `Company - Tata Consultancy Services (TCS`
+   `Company - Flipkart`
 
 Table: OrdersDetails
 
@@ -639,7 +639,7 @@ OrdersDetails table:
 ### Q.1 Codestudio Bank (CSB) helps its coders in making virtual payments. Our bank records all transactions in the table Transaction, we want to find out the current balance of all users and check wheter they have breached their credit limit (If their current credit is less than 0). Write an SQL query to report. user_id user_name credit, current balance after performing transactions.   credit_limit_breached, check credit_limit ("Yes" or "No"). Return the result table in any order.
 
    **IMDB Rating**:
-   `Company - Thought Works`
+   `Company - Microsoft, Amazon, Google`
    
 Table: Users
 
