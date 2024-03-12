@@ -2,6 +2,7 @@
 # :computer: CodingNinjas SQL  Interview Problems and Solutions - 
 - [Easy](https://github.com/yogeshkasar778/CodingNinjas_SQL_problems/new/main?readme=1#dart-difficulty-level---easy)
 - [Moderate](https://github.com/yogeshkasar778/CodingNinjas_SQL_problems/new/main?readme=1#dart-difficulty-level---moderate)
+- [Ninja](https://github.com/yogeshkasar778/CodingNinjas_SQL_problems/edit/main/README.md#dart-difficulty-level---ninja)
 ##  :dart: `Difficulty Level - Easy`
   
  ### Q.1 Print the title and ratings of the movies released in 2012 whose metacritic rating is more than 60 and Domestic collections exceed 10 Crores. (Download the dataset from console)
@@ -632,9 +633,86 @@ OrdersDetails table:
     from IMDB as i
     left join genre as g on i.movie_id=g.movie_id
     where g.genre like'C%' and i.Title like'%2014%' and i.Budget>40000000;
+
+##  :dart: `Difficulty Level - Ninja`
+
+### Q.1 Codestudio Bank (CSB) helps its coders in making virtual payments. Our bank records all transactions in the table Transaction, we want to find out the current balance of all users and check wheter they have breached their credit limit (If their current credit is less than 0). Write an SQL query to report. user_id user_name credit, current balance after performing transactions.   credit_limit_breached, check credit_limit ("Yes" or "No"). Return the result table in any order.
+
+   **IMDB Rating**:
+   `Company - Thought Works`
+   
+Table: Users
+
+| Column Name  | Type    |
+|--------------|---------|
+| user_id      | int     |
+| user_name    | varchar |
+| credit       | int     |
+
+user_id is the primary key for this table.
+Each row of this table contains the current credit information for each user.
+
+Table: Transactions
+
+| Column Name   | Type    |
+|---------------|---------|
+| trans_id      | int     |
+| paid_by       | int     |
+| paid_to       | int     |
+| amount        | int     |
+| transacted_on | date    |
+
+trans_id is the primary key for this table.
+Each row of this table contains the information about the transaction in the bank.
+User with id (paid_by) transfer money to user with id (paid_to).
+
+The query result format is in the following example.
+
+Users table:
+
+| user_id    | user_name    | credit      |
+|------------|--------------|-------------|
+| 1          | Moustafa     | 100         |
+| 2          | Jonathan     | 200         |
+| 3          | Winston      | 10000       |
+| 4          | Luis         | 800         | 
+
+Transactions table:
+
+| trans_id   | paid_by    | paid_to    | amount   | transacted_on |
+|------------|------------|------------|----------|---------------|
+| 1          | 1          | 3          | 400      | 2020-08-01    |
+| 2          | 3          | 2          | 500      | 2020-08-02    |
+| 3          | 2          | 1          | 200      | 2020-08-03    |
+
+ ###  Solution - 
     
+    with cte as 
+        (select paid_by as user_id, amount * -1 as amount from Transactions
+        union
+        select paid_to as user_id, amount from Transactions)
+    ,
+    cte1 as 
+       (select user_id, sum(amount) as all_transaction 
+        from cte
+        group by user_id)
+    ,
+    cte2 as 
+       (select t1.user_id, t1.user_name, (credit+ coalesce(all_transaction,0)) as credit 
+        from Users as t1
+        left join cte1 as t2 on t1.user_id=t2.user_id)
 
+   select *, case when credit > 0 then 'No' else 'Yes' end as credit_limit_breached  
+   from cte2;
 
+Result table:
+
+| user_id    | user_name  | credit     | credit_limit_breached |
+|------------|------------|------------|-----------------------|
+| 1          | Moustafa   | -100       | Yes                   | 
+| 2          | Jonathan   | 500        | No                    |
+| 3          | Winston    | 9900       | No                    |
+| 4          | Luis       | 800        | No                    |
 
 
 
