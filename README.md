@@ -396,7 +396,7 @@ The query result format is in the following example:
 Views table:
 
 | article_id | author_id | viewer_id | view_date  |
-+------------+-----------+-----------+------------|
+|------------|-----------|-----------|------------|
 | 1          | 3         | 5         | 2019-08-01 |
 | 3          | 4         | 5         | 2019-08-01 |
 | 1          | 3         | 6         | 2019-08-02 |
@@ -620,7 +620,28 @@ OrdersDetails table:
      from temp
      where max_quantity > (select max(avg_quantity) from temp);
 
-        
+### Q.17 A pupil Tim gets homework to identify whether three line segments could possibly form a triangle. However, this assignment is very heavy because there are hundreds of records to calculate. Could you help Tim by writing a query to judge whether these three  sides can form a triangle, assuming table triangle holds the length of the three sides x, y and z.
+
+   **Triangle Judgement**:
+   `Company - Oracle`        
+
+| x  | y  | z  |
+|----|----|----|
+| 13 | 15 | 30 |
+| 10 | 20 | 15 |
+ 
+###  Solution - 
+
+     select *, 
+           case when x+y>z and y+z>x and z+z>y then 'Yes' else 'No' end as triangle 
+     from Triangle 
+
+ For the sample data above, your query should return the follow result:
+ | x  | y  | z  | triangle |
+ |----|----|----|----------|
+ | 13 | 15 | 30 | No       |
+ | 10 | 20 | 15 | Yes      |
+ 
 ##  :dart: `Difficulty Level - Moderate`
 
  ### Q.1 From the IMDb dataset, print the title and rating of those movies that have a genre starting from 'C' released in 2014 with a budget higher than 4 Crore.
