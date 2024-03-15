@@ -641,7 +641,32 @@ OrdersDetails table:
  |----|----|----|----------|
  | 13 | 15 | 30 | No       |
  | 10 | 20 | 15 | Yes      |
+
+ ### Q.18 Write a SQL query to find all duplicate emails in a table named Person.
  
+   **Duplicate Emails**:
+   `Company - Oracle`        
+
+| Id | Email   |
+|----|---------|
+| 1  | a@b.com |
+| 2  | c@d.com |
+| 3  | a@b.com |
+
+
+###  Solution - 
+
+     select *, 
+           case when x+y>z and y+z>x and z+z>y then 'Yes' else 'No' end as triangle 
+     from Triangle 
+
+For example, your query should return the following for the above table:
+
+| Email   |
+|---------|
+| a@b.com |
+
+
 ##  :dart: `Difficulty Level - Moderate`
 
  ### Q.1 From the IMDb dataset, print the title and rating of those movies that have a genre starting from 'C' released in 2014 with a budget higher than 4 Crore.
