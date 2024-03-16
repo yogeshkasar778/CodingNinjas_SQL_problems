@@ -645,7 +645,7 @@ OrdersDetails table:
  ### Q.18 Write a SQL query to find all duplicate emails in a table named Person.
  
    **Duplicate Emails**:
-   `Company - Oracle`        
+   `Company - IBM`        
 
 | Id | Email   |
 |----|---------|
@@ -666,6 +666,28 @@ For example, your query should return the following for the above table:
 |---------|
 | a@b.com |
 
+ ### Q.19 Write a SQL query to find all duplicate emails in a table named Person.
+ 
+   **Marvel Cities**:
+   `Company - Tata Consultancy Services`        
+
+Query all columns for all Marvel cities in the CITY table with populations larger than 100000. The CountryCode for Marvel is Marv.
+
+The CITY table is described as follows:
+
+| Field  |  Type    |
++---------+--------+
+|   ID    |  Number  | 
+|   Name  | Varchar  |
+|   CountryCode | Varchar  |
+|   Population |   Number  | 
+
+
+###  Solution - 
+
+     select * 
+     from CITY
+     where population >100000 and countrycode = 'Marv'; 
 
 ##  :dart: `Difficulty Level - Moderate`
 
