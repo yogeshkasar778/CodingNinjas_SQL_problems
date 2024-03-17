@@ -688,6 +688,75 @@ The CITY table is described as follows:
      select * 
      from CITY
      where population >100000 and countrycode = 'Marv'; 
+     
+ ### Q.20 Write an SQL query that will, for all products, return each product name with total amount due, paid, canceled, and refunded across all invoices. Return the result table ordered by product_name.
+ 
+   **Product's Worth Over Invoices**:
+   `Company - Tata Consultancy Services`        
+   
+Table: Product
+
+| Column Name | Type    |
+|-------------|---------|
+| product_id  | int     |
+| name        | varchar |
+
+product_id is the primary key for this table.
+This table contains the ID and the name of the product. The name consists of only lowercase English letters. No two products have the same name.
+
+Table: Invoice
+
+| Column Name | Type |
+|-------------|------|
+| invoice_id  | int  |
+| product_id  | int  |
+| rest        | int  |
+| paid        | int  |
+| canceled    | int  |
+| refunded    | int  |
+
+invoice_id is the primary key for this table and the id of this invoice.
+product_id is the id of the product for this invoice.
+rest is the amount left to pay for this invoice.
+paid is the amount paid for this invoice.
+canceled is the amount canceled for this invoice.
+refunded is the amount refunded for this invoice.
+
+The query result format is in the following example:
+
+Product table:
+
+| product_id | name  |
+|------------|-------|
+| 0          | ham   |
+| 1          | bacon |
+
+Invoice table:
+
+| invoice_id | product_id | rest | paid | canceled | refunded |
+|------------|------------|------|------|----------|----------|
+| 23         | 0          | 2    | 0    | 5        | 0        |
+| 12         | 0          | 0    | 4    | 0        | 3        |
+| 1          | 1          | 1    | 1    | 0        | 1        |
+| 2          | 1          | 1    | 0    | 1        | 1        |
+| 3          | 1          | 0    | 1    | 1        | 1        |
+| 4          | 1          | 1    | 1    | 1        | 0        |
+
+###  Solution - 
+
+     select p.name,sum(i.rest) as rest, sum(i.paid) as paid, 
+          sum(i.canceled) as canceled, sum(i.refunded) as refunded
+     from Product as p 
+     join Invoice as i on p.product_id=i.product_id
+     group by p.name
+     
+Result table:
+
+| name  | rest | paid | canceled | refunded |
+|-------|------|------|----------|----------|
+| bacon | 3    | 3    | 3        | 3        |
+| ham   | 2    | 4    | 5        | 3        |
+
 
 ##  :dart: `Difficulty Level - Moderate`
 
