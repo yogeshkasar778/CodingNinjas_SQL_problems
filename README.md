@@ -761,15 +761,40 @@ Result table:
 ##  :dart: `Difficulty Level - Moderate`
 
  ### Q.1 From the IMDb dataset, print the title and rating of those movies that have a genre starting from 'C' released in 2014 with a budget higher than 4 Crore.
-   **IMDB Rating**:
+   **Second Highest Salary**:
    `Company - Thought Works`
-   
+
+| Id | Salary |
+|----|--------|
+| 1  | 100    |
+| 2  | 200    |
+| 3  | 300    |
+
+For example, given the above Employee table, the query should return 200 as the second highest salary. If there is no second highest salary, then the query should return null.
+
  ###  Solution - 
     
     Select i.Title,i.Rating 
     from IMDB as i
     left join genre as g on i.movie_id=g.movie_id
     where g.genre like'C%' and i.Title like'%2014%' and i.Budget>40000000;
+
+ ### Q.2 Write a SQL query to get the second highest salary from the Employee table.
+ 
+   **IMDB Rating**:
+   `Company - Thought Works`
+   
+ ###  Solution - 
+    
+    select max(salary) as salary 
+    from employee
+    where salary not in (select max(salary) as salary from employee)
+
+Result:
+
+| SecondHighestSalary |
+|---------------------|
+| 200                 |
 
 ##  :dart: `Difficulty Level - Ninja`
 
