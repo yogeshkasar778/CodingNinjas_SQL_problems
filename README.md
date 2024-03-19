@@ -796,6 +796,38 @@ Result:
 |---------------------|
 | 200                 |
 
+ ### Q.3  Write a SQL query to delete all duplicate email entries in a table named Person, keeping only unique emails based on its smallest Id.
+ 
+   **Delete Duplicate emails**:
+   `Company - Thought Works`
+
+| Id | Email            |
+|----|------------------|
+| 1  | john@example.com |
+| 2  | bob@example.com  |
+| 3  | john@example.com |
+
+Id is the primary key column for this table.
+For example, after running your query, the above Person table should have the following rows:
+ 
+ ###  Solution - 
+    
+    delete from person 
+    where id in ( 
+    select t1.id 
+    from person t1 inner join person t2 on t1.email = t2.email and t1.id!=t2.id and t1.id>t2.id 
+    );
+
+    select * from person;
+    
+Result:
+
+| Id | Email            |
+|----|------------------|
+| 1  | john@example.com |
+| 2  | bob@example.com  |
+
+
 ##  :dart: `Difficulty Level - Ninja`
 
 ### Q.1 Codestudio Bank (CSB) helps its coders in making virtual payments. Our bank records all transactions in the table Transaction, we want to find out the current balance of all users and check wheter they have breached their credit limit (If their current credit is less than 0). Write an SQL query to report. user_id user_name credit, current balance after performing transactions.   credit_limit_breached, check credit_limit ("Yes" or "No"). Return the result table in any order.
