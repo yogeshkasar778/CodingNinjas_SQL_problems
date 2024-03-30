@@ -1,5 +1,5 @@
 
-# :computer: CodingNinjas SQL  Interview Problems and Solutions - 
+# :computer: CodingNinjas SQL  Interview Problems and Solutions
 - [Easy](https://github.com/yogeshkasar778/CodingNinjas_SQL_problems/new/main?readme=1#dart-difficulty-level---easy)
 - [Moderate](https://github.com/yogeshkasar778/CodingNinjas_SQL_problems/new/main?readme=1#dart-difficulty-level---moderate)
 - [Ninja](https://github.com/yogeshkasar778/CodingNinjas_SQL_problems/edit/main/README.md#dart-difficulty-level---ninja)
@@ -826,6 +826,51 @@ Result:
 |----|------------------|
 | 1  | john@example.com |
 | 2  | bob@example.com  |
+
+ ### Q.4  Write an SQL query to report the number of calls and the total call duration between each pair of distinct persons (person1, person2) where person1 < person2. Return the result table in any order.
+ 
+   **Number of Calls Between Two Persons**:
+   `Company - Thought Works`
+
+| Column Name | Type    |
+|-------------|---------|
+| from_id     | int     |
+| to_id       | int     |
+| duration    | int     |
+
+This table does not have a primary key, it may contain duplicates.
+This table contains the duration of a phone call between from_id and to_id.
+from_id != to_id
+
+The query result format is in the following example:
+
+Calls table:
+
+| from_id | to_id | duration |
+|---------|-------|----------|
+| 1       | 2     | 59       |
+| 2       | 1     | 11       |
+| 1       | 3     | 20       |
+| 3       | 4     | 100      |
+| 3       | 4     | 200      |
+| 3       | 4     | 200      |
+| 4       | 3     | 499      |
+ 
+ ###  Solution - 
+    
+    select case when from_id > to_id then to_id else from_id end as person1,
+          case when from_id > to_id then from_id else to_id end as person2, 
+          count(*) as call_count, sum(duration) as total_duration
+    from Calls
+    group by person1,person2;
+    
+Result:
+
+| person1 | person2 | call_count | total_duration |
+|---------|---------|------------|----------------|
+| 1       | 2       | 2          | 70             |
+| 1       | 3       | 1          | 20             |
+| 3       | 4       | 4          | 999            |
 
 
 ##  :dart: `Difficulty Level - Ninja`
