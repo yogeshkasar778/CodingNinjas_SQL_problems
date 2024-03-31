@@ -872,6 +872,34 @@ Result:
 | 1       | 3       | 1          | 20             |
 | 3       | 4       | 4          | 999            |
 
+ ### Q.5 Write a query to find the shortest distance between two points in these points.
+ 
+ Table point holds the x coordinate of some points on x-axis in a plane, which are all integers.
+ 
+   **Shortest Distance**:
+   `Company - Thought Works`
+
+Points table:
+
+| x   |
+|-----|
+| -1  |
+| 0   |
+| 2   |
+
+The shortest distance is '1' obviously, which is from point '-1' to '0'. So the output is as below:
+
+ ###  Solution - 
+    
+    select min(ABS(p1.x-p2.x)) as shortest 
+    from point as p1
+    join point as p2 on p1.x!=p2.x
+    
+Result:
+
+| shortest|
+|---------|
+|  1      |
 
 ##  :dart: `Difficulty Level - Ninja`
 
